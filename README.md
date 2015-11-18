@@ -14,7 +14,7 @@ Sample RESTful Service
 
 # Running (Within Container)
  1. After Building (Container)
- 1. `docker run -p --rm 11223:11223 cnuss/greeting-service:0.1.0`
+ 1. `docker run --rm -p 11223:11223 cnuss/greeting-service:0.1.0`
 
 # Pushing (Container)
 1. After Building (Container)
