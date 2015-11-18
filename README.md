@@ -16,6 +16,10 @@ Sample RESTful Service
  1. After Building (Container)
  1. `docker run -p --rm 11223:11223 cnuss/greeting-service:0.1.0`
 
+# Pushing (Container)
+1. After Building (Container)
+2. `docker push cnuss/greeting-service:0.1.0`
+
 # Connecting
  1. http://localhost:11223/greeting
  1. http://localhost:11223/greeting?name=Christian
