@@ -1,16 +1,19 @@
 # greeting-service
 Sample RESTful Service
 
-# Building
-
+# Building (Locally)
  1. `./gradlew installDist`
+
+# Building (Container)
+ 1. After Building (Locally)
  1. `docker build --tag=cnuss/greeting-service:0.1.0 .`
 
-# Testing
-TODO
+# Running (Locally)
+ 1. After Building (Locally)
+ 1. `build/install/greeting-service/bin/greeting-service`
 
-# Running
-After building:
+# Running (Within Container)
+ 1. After Building (Container)
  1. `docker run -p --rm 11223:11223 cnuss/greeting-service:0.1.0`
 
 # Connecting
