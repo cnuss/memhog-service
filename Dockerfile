@@ -1,4 +1,4 @@
-FROM hub.cchh.io/christian/java:0011
+FROM java:8u66
 
 EXPOSE 11223
 
