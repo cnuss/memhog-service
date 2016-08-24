@@ -1,5 +1,7 @@
 package hello;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +31,7 @@ public class GreetingController {
             ip = InetAddress.getLocalHost();
             hostname = ip.getHostName();
         } catch (UnknownHostException e) {
-            return "Unknown: " + e.getMessage()
+            return "Unknown: " + e.getMessage();
         }
 
         return hostname;
