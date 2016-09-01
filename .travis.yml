@@ -8,6 +8,5 @@ services:
 script:
  - ./gradlew installDist
  - docker build --tag=cnuss/greeting-service:travis_$TRAVIS_BUILD_NUMBER .
- - echo $TRAVIS_BUILD_NUMBER
- - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+ - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" hub.docker.com
  - docker push cnuss/greeting-service:travis_$TRAVIS_BUILD_NUMBER
