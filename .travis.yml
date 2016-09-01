@@ -1,0 +1,13 @@
+sudo: required
+
+language: java
+
+services:
+ - docker
+
+script:
+ - ./gradlew installDist
+
+after_script:
+ - docker build --tag=cnuss/greeting-service:travis_$TRAVIS_BUILD_NUMBER .
+ - docker push cnuss/greeting-service:travis_$TRAVIS_BUILD_NUMBER
