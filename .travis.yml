@@ -7,6 +7,6 @@ services:
 
 script:
  - ./gradlew installDist
- - docker build --tag=cnuss/greeting-service:travis_$TRAVIS_BUILD_NUMBER .
+ - docker build --tag=cnuss/memhog-service:travis_$TRAVIS_BUILD_NUMBER .
  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" https://index.docker.io/v1/
- - docker push cnuss/greeting-service:travis_$TRAVIS_BUILD_NUMBER
+ - docker push cnuss/memhog-service:travis_$TRAVIS_BUILD_NUMBER

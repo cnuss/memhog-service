@@ -1,25 +1,35 @@
-# greeting-service
-Sample RESTful Service
+# memhog-service
+A Java Service that is a memory hog.
+
+Once invoking `/begin` on the service, the application will request memory from the Java heap until an OutOfMemoryError is generated.
+
+This service was written to deploy multiple containers on a single machine to demonstrate what happens you overprovision memory on a system, to invoke `containerd`'s OOM killer or the OS's OOM handler
 
 # Building (Locally)
  1. `./gradlew installDist`
 
 # Building (Container)
  1. After Building (Locally)
- 1. `docker build --tag=cnuss/greeting-service:0.1.0 .`
+ 1. `docker build --tag=cnuss/memhog-service:latest .`
 
 # Running (Locally)
  1. After Building (Locally)
- 1. `build/install/greeting-service/bin/greeting-service`
+ 1. `build/install/memhog-service/bin/memhog-service`
 
 # Running (Within Container)
  1. After Building (Container)
- 1. `docker run --rm -p 11223:11223 cnuss/greeting-service:0.1.0`
+ 1. `docker run -d -v /tmp:/logs -p 11223:11223 -e "JAVA_OPTS=-Xmx2g" cnuss/memhog-service:latest`
+   1. `-v /tmp:/logs` - The Memhog Service will create a logfile (so you can run multiple hogs on one machine and have the logs all go to one file)
+   1. `-e "JAVA_OPTS=-Xmx2g"` -  Dynamically set any Java Options, such as heap size!
 
 # Pushing (Container)
 1. After Building (Container)
-2. `docker push cnuss/greeting-service:0.1.0`
+2. `docker push cnuss/memhog-service:latest`
 
 # Connecting
- 1. http://localhost:11223/greeting
- 1. http://localhost:11223/greeting?name=Christian
+ 1. http://localhost:11223/begin
+ 1. http://localhost:11223/begin?increment=2&sleep=1
+   1. `increment` - The exponential rate at to which request more memory.  Each increment will request `iteration_num * increment` bytes of data
+     1. Defaults to 5
+   1. `sleep` - The amount of time (in seconds) to sleep between requests
+     1. Defaults to 1 second
