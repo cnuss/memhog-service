@@ -2,6 +2,9 @@ package hello;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+
+import java.util.List;
+import java.util.ArrayList;
  
 public class OomGenerator implements Runnable {
 	private String id;
@@ -9,11 +12,15 @@ public class OomGenerator implements Runnable {
 	private int increment;
 	private double sleep;
 
+	private List<int[]> allocatedLists;
+
 	public OomGenerator(String id, int bytes, int increment, double sleep) {
 		this.id = id;
 		this.bytes = bytes;
 		this.increment = increment;
 		this.sleep = sleep;
+
+		this.allocatedLists = new ArrayList<int[]>();
 	}
 
 	public void run() {
@@ -25,12 +32,14 @@ public class OomGenerator implements Runnable {
 				log("Iteration " + outerIterator + " Max Mem: " + Runtime.getRuntime().maxMemory() + " Free Mem: " + Runtime.getRuntime().freeMemory());
 				int loop1 = 2;
 				int[] memoryFillIntVar = new int[iteratorValue];
-				
+
 				do {
 					memoryFillIntVar[loop1] = 0;
 					loop1--;
 				} while (loop1 > 0);
-				
+
+				allocatedLists.add(memoryFillIntVar);
+
 				iteratorValue = iteratorValue * increment;
 				log("Required Memory for next loop: " + iteratorValue);
 				Thread.sleep((long)(sleep * 1000));
