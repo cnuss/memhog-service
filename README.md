@@ -27,10 +27,14 @@ This service was written to deploy multiple containers on a single machine to de
 
 # Connecting
  1. http://localhost:11223/begin
- 1. http://localhost:11223/begin?bytes=100&increment=5&sleep=2.0
+ 1. http://localhost:11223/begin?bytes=100&increment=5&sleep=2.0&cpuHeavy=true&numThreads=5
    1. `bytes` - The amount of bytes to request on the first iteration
      1. Defaults to 1
    1. `increment` - The exponential rate at to which request more memory.  Each increment will request `iteration_num * bytes * increment` bytes of data
      1. Defaults to 2
    1. `sleep` - The amount of time (in seconds) to sleep between requests, in decimal format
      1. Defaults to 1.0 second
+   1. `cpuHeavy` - Hog the CPU too.  Leverages `java.util.SecureRandom` with the `SHA1PRNG` algorithim to generate random numbers as memory is allocated
+     1. Defaults to false
+   1. `numThreads` - Number of threads to create.  Each thread will independly allocate memory with the above settings
+     1. Defaults to 1
