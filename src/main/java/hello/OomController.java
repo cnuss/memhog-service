@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class OomController {
 
     @RequestMapping("/begin")
-    public String greeting(@RequestParam(value="increment", defaultValue="5") String increment, @RequestParam(value="sleep", defaultValue="1") String sleep) {
-        (new Thread(new OomGenerator(getHostName(), "/logs/oom.log", Integer.valueOf(increment), Integer.valueOf(sleep)))).start();
+    public String greeting(@RequestParam(value="bytes", defaultValue="1") String bytes, 
+                           @RequestParam(value="increment", defaultValue="2") String increment, 
+                           @RequestParam(value="sleep", defaultValue="1.0") String sleep) {
+        (new Thread(new OomGenerator(getHostName(), Integer.valueOf(bytes), Integer.valueOf(increment), Double.valueOf(sleep)))).start();
         return "started";
     }
 
